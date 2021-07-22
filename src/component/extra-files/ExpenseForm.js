@@ -23,7 +23,7 @@ const ExpenseForm = (props) => {
 
         const expenseData = {
             title: enteredTitle,
-            amount: enteredAmount,
+            amount: parseFloat(enteredAmount),
             date: enteredDate ? new Date(enteredDate) : new Date()
         }
         
@@ -43,12 +43,12 @@ const ExpenseForm = (props) => {
                 <div className="new-expense__control">
                     <label>Amount</label>
                     <input type="number"   min='0.01'
-            step='0.01' value={enteredAmount} onChange={onAmountChange}/>
+                        step='0.01' value={enteredAmount} onChange={onAmountChange}/>
                 </div>
                 <div className="new-expense__control">
                     <label>Date</label>
                     <input type="date"   min='2019-01-01'
-            max='2022-12-31' value={enteredDate} onChange={onDateChange}/>
+                        max='2022-12-31' value={enteredDate} onChange={onDateChange}/>
                 </div>
             </div>
             <div className="new-expense__action">
