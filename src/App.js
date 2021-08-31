@@ -1,7 +1,12 @@
 import { useState } from "react";
+import { Route} from "react-router-dom";
+
 import "./App.css";
 import Expenses from "./components/Expense/Expenses";
 import NewExpense from "./components/extra-files/NewExpense";
+
+import Header from './components/layout/header/header';
+import Meals from "./components/meals/meals";
 
 const DUMMY_EXPENSES = [
   {
@@ -27,11 +32,33 @@ function App() {
   }
 
   const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
+
+  const navItem = [
+    {
+      link: '/',
+      name: 'Home'
+    },
+    {
+      link: '/expense',
+      name: 'Expense'
+    }
+  ]
+
   
   return (
     <div className="App">
-      <NewExpense onAddExpense={addExpenseHandle}/>
-      <Expenses items={expenses}/>
+      <Route path="/">
+         <Header />
+         <main>
+           <Meals />
+         </main>
+      </Route>
+
+      <Route path="/expenses">
+        <NewExpense onAddExpense={addExpenseHandle}/>
+        <Expenses items={expenses}/>
+      </Route>
+  
     </div>
   );
 }
