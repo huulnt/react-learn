@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Route} from "react-router-dom";
+import { Route } from "react-router-dom";
 
 import "./App.css";
+import Cart from "./components/cart/cart";
 import Expenses from "./components/Expense/Expenses";
 import NewExpense from "./components/extra-files/NewExpense";
 
@@ -35,7 +36,7 @@ function App() {
 
   const navItem = [
     {
-      link: '/',
+      link: '/home',
       name: 'Home'
     },
     {
@@ -44,21 +45,22 @@ function App() {
     }
   ]
 
-  
+
   return (
     <div className="App">
-      <Route path="/">
-         <Header />
-         <main>
-           <Meals />
-         </main>
+      <Route path="/home">
+        <Cart />
+        <Header />
+        <main>
+          <Meals />
+        </main>
       </Route>
 
       <Route path="/expenses">
-        <NewExpense onAddExpense={addExpenseHandle}/>
-        <Expenses items={expenses}/>
+        <NewExpense onAddExpense={addExpenseHandle} />
+        <Expenses items={expenses} />
       </Route>
-  
+
     </div>
   );
 }
