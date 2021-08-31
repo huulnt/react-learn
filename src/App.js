@@ -45,12 +45,21 @@ function App() {
     }
   ]
 
+  const [cartIsShown, setCartIsShow] = useState(false);
+
+  const showCartHandle = () => {
+    setCartIsShow(true);
+  }
+
+  const hideCartHandle = () => {
+    setCartIsShow(false);
+  }
 
   return (
     <div className="App">
       <Route path="/home">
-        <Cart />
-        <Header />
+        {cartIsShown && <Cart onClose={hideCartHandle}/>}
+        <Header onShowCart={showCartHandle}/>
         <main>
           <Meals />
         </main>
