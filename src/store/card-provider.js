@@ -1,4 +1,6 @@
-import { useReducer } from "react";
+import {
+    useReducer
+} from "react";
 import CartContext from "./card-context";
 
 const defaultCartState = {
@@ -32,31 +34,59 @@ const cartReducer = (state, action) => {
         }
     }
 
-    if (action.type === 'DELETE') {
-        
+    if (action.type === 'REMOVE') {
+        const existingCartItemIndex = state.items.findIndex(item => item.id === action.id);
+        const existingCartItem = state.items[existingCartItemIndex];
+        const updatedTotalAmount = state.totalAmount - existingCartItem.price;
+        let updateItems;
+
+        if (existingCartItem.amount === 1) {
+            updateItems = state.items.filter(item => item.id !== action.id)
+        } else {
+            debugger;
+            const updateItem = {
+                ...existingCartItem,
+                amount: existingCartItem.amount - 1
+            }
+            updateItems = [...state.items];
+            updateItems[existingCartItemIndex] = updateItem
+        }
+        return {
+            items: updateItems,
+            totalAmount: updatedTotalAmount
+        }
     }
     return defaultCartState;
 }
 
-const CartProvider = (props) => { 
+const CartProvider = (props) => {
 
     const [cartState, dispatchCartAction] = useReducer(cartReducer, defaultCartState);
     const addItemToCartHandle = (item) => {
-        dispatchCartAction({type: 'ADD', item});
+        dispatchCartAction({
+            type: 'ADD',
+            item
+        });
     }
     const removeItemToCartHandle = (id) => {
-        dispatchCartAction({type: 'ADD', id});
+        dispatchCartAction({
+            type: 'REMOVE',
+            id
+        });
     }
 
     const cartContext = {
         items: cartState.items,
         totalAmount: cartState.totalAmount,
         addItem: addItemToCartHandle,
-        removeItem: removeItemToCartHandle, 
+        removeItem: removeItemToCartHandle,
     }
-    return <CartContext.Provider value={cartContext}>
-        {props.children}
-    </CartContext.Provider>
- }
+    return <CartContext.Provider value = {
+            cartContext
+        } > {
+            props.children
+        } <
+        /CartContext.Provider>
+}
 
 export default CartProvider;
