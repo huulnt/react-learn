@@ -1,4 +1,4 @@
-import { useContext } from 'react/cjs/react.development';
+import { useContext } from 'react';
 import CartContext from '../../../store/card-context';
 import MealItemForm from './meal-item-form';
 import classes from './meal-item.module.css';
