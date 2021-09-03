@@ -80,12 +80,9 @@ const CartProvider = (props) => {
         addItem: addItemToCartHandle,
         removeItem: removeItemToCartHandle,
     }
-    return <CartContext.Provider value = {
-            cartContext
-        } > {
-            props.children
-        } <
-        /CartContext.Provider>
+    return <CartContext.Provider value={cartContext} > 
+        {props.children} 
+    </CartContext.Provider>
 }
 
-export default CartProvider;
+        export default CartProvider;
