@@ -57,3 +57,17 @@
     transform: scale(1);
   }
 }
+
+@media (min-width: 375px) {
+  button {
+    padding: 0.55rem 1rem !important;
+  }
+  .cart{
+    font-size: 0.75rem;
+  }
+
+  .badge{
+    padding: 0.25rem 0.5rem;
+    margin-left: 0.5rem;
+  }
+}

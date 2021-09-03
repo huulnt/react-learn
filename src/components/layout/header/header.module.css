@@ -33,3 +33,13 @@
   object-fit: cover;
   transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem);
 }
+
+@media (min-width: 375px) {
+  h1 {
+    font-size: 1rem;
+  }
+
+  .header-content{
+    padding: 0 5%;
+  }
+}
