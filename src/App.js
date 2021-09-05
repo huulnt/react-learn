@@ -10,6 +10,8 @@ import Header from './components/layout/header/header';
 import Meals from "./components/meals/meals";
 import CartProvider from "./store/card-provider";
 
+import Counter from './components/auth/Counter';
+
 const DUMMY_EXPENSES = [
   {
     id: 1,
@@ -58,7 +60,7 @@ function App() {
 
   return (
     <div className="App">
-      <Route path="/">
+      <Route path="/meals">
         <CartProvider>
           {cartIsShown && <Cart onClose={hideCartHandle} />}
           <Header onShowCart={showCartHandle} />
@@ -73,6 +75,9 @@ function App() {
         <Expenses items={expenses} />
       </Route>
 
+      <Route path="/counter">
+        <Counter />
+      </Route>
     </div>
   );
 }
