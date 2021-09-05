@@ -60,7 +60,7 @@ function App() {
 
   return (
     <div className="App">
-      <Route path="/meals">
+      <Route path="/react-learn">
         <CartProvider>
           {cartIsShown && <Cart onClose={hideCartHandle} />}
           <Header onShowCart={showCartHandle} />
