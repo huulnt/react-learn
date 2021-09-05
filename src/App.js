@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Route } from "react-router-dom";
 
 import "./App.css";
@@ -11,6 +12,9 @@ import Meals from "./components/meals/meals";
 import CartProvider from "./store/card-provider";
 
 import Counter from './components/auth/Counter';
+import AuthHeader from './components/auth/Header';
+import Auth from './components/auth/Auth';
+import UserProfile from './components/auth/UserProfile';
 
 const DUMMY_EXPENSES = [
   {
@@ -37,17 +41,6 @@ function App() {
 
   const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
 
-  const navItem = [
-    {
-      link: '/home',
-      name: 'Home'
-    },
-    {
-      link: '/expense',
-      name: 'Expense'
-    }
-  ]
-
   const [cartIsShown, setCartIsShow] = useState(false);
 
   const showCartHandle = () => {
@@ -57,6 +50,8 @@ function App() {
   const hideCartHandle = () => {
     setCartIsShow(false);
   }
+
+  const isAuth = useSelector(state => state.auth.isAuthenticated)
 
   return (
     <div className="App">
@@ -76,6 +71,9 @@ function App() {
       </Route>
 
       <Route path="/counter">
+        <AuthHeader />
+        {!isAuth && <Auth />}
+        {isAuth && <UserProfile />}
         <Counter />
       </Route>
     </div>
